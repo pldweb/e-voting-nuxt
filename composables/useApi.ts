@@ -1,6 +1,6 @@
 export function useApi() {
   const config = useRuntimeConfig()
-  const token = useCookie('token')
+  const token = useCookie<string | null>('token')
 
   async function fetchApi<T = any>(path: string, options: RequestInit = {}): Promise<T> {
     const headers: Record<string, string> = {
@@ -10,16 +10,28 @@ export function useApi() {
       ...(options.headers as Record<string, string> || {}),
     }
 
-    const res = await $fetch<{ status: string; message: string; data: T; errors?: any }>(`${config.public.apiBase}${path}`, {
+    const url = `${config.public.apiBase}${path}`
+
+    const res = await $fetch<{ success: boolean; message: string; data: T; meta?: any; errors?: any }>(url, {
       ...options,
       headers,
     })
 
-    if (res.status === 'error') {
+    // Backend returns: { success: bool, message: string, data: T }
+    if (!res.success) {
+      // Handle 401 globally
+      const authStore = useAuthStore()
+      authStore.clearAuth()
+      await navigateTo('/login')
       throw new Error(res.message || 'Terjadi kesalahan')
     }
 
-    return res.data
+    // Attach meta if present (for paginated responses)
+    if (res.meta) {
+      return { data: res.data, meta: res.meta } as any as T
+    }
+
+    return res.data as T
   }
 
   return {

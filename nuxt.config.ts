@@ -5,9 +5,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  modules: ['@nuxt/icon'],
+  modules: ['@nuxt/icon', '@pinia/nuxt'],
   vite: {
     plugins: [tailwindcss()],
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
   },
   icon: {
     provider: 'server',
@@ -15,7 +18,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api/v1',
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api',
     }
   }
 })

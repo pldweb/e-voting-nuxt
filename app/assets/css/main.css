@@ -1,43 +1,37 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import 'tailwindcss';
 
 @theme {
-  --color-primary-50: #e6f7ee;
-  --color-primary-100: #c3ebd4;
-  --color-primary-200: #9cdfb8;
-  --color-primary-300: #74d39b;
-  --color-primary-400: #52c981;
-  --color-primary-500: #35bf6a;
-  --color-primary-600: #017C3D;
-  --color-primary-700: #016b34;
-  --color-primary-800: #015a2b;
-  --color-primary-900: #01401e;
-  --color-primary-950: #012d15;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --color-primary-50: #e6f2ec;
+  --color-primary-100: #b3dbcc;
+  --color-primary-200: #80c4ab;
+  --color-primary-300: #4dad8b;
+  --color-primary-400: #1a966a;
+  --color-primary-500: #017C3D;
+  --color-primary-600: #016e36;
+  --color-primary-700: #015a2c;
+  --color-primary-800: #014622;
+  --color-primary-900: #013218;
+  --color-primary-950: #001e0e;
 
-  --color-secondary-50: #fff3eb;
-  --color-secondary-100: #ffe0c7;
-  --color-secondary-200: #ffc99a;
-  --color-secondary-300: #ffb06d;
-  --color-secondary-400: #ff9b47;
+  --color-secondary-50: #fff0e8;
+  --color-secondary-100: #ffd1b8;
+  --color-secondary-200: #ffb389;
+  --color-secondary-300: #ff9459;
+  --color-secondary-400: #ff762a;
   --color-secondary-500: #FF6916;
-  --color-secondary-600: #e55e12;
-  --color-secondary-700: #cc530f;
-  --color-secondary-800: #993d0b;
-  --color-secondary-900: #662807;
-  --color-secondary-950: #401905;
-
-  --radius: 0.625rem;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 4px);
-  --radius-xl: calc(var(--radius) + 8px);
+  --color-secondary-600: #e65e13;
+  --color-secondary-700: #b3490f;
+  --color-secondary-800: #80340b;
+  --color-secondary-900: #4d1f07;
+  --color-secondary-950: #1a0a02;
 }
 
 @layer base {
-  * {
-    @apply border-gray-200;
-  }
-  body {
-    @apply bg-white text-gray-900;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  }
+  * { @apply border-gray-200; }
+  body { @apply bg-gray-50 text-gray-900 antialiased; }
+  .dark body { @apply bg-gray-950 text-gray-100; }
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
